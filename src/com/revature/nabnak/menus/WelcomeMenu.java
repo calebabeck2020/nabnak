@@ -6,6 +6,8 @@ import com.revature.nabnak.util.MenuRouter;
 import java.io.*;
 import java.time.LocalDateTime;
 
+import static com.revature.nabnak.util.AppState.shutdown;
+
 public class WelcomeMenu extends Menu {
 
     static String[] welcomeMessages = {"Welcome to Nabnak", "1) Login", "2) Register", "3) View Members", "4) Exit Application"};
@@ -30,7 +32,7 @@ public class WelcomeMenu extends Menu {
                 switch (input) {
                     case "1":
                         System.out.println("User has selected login..."); // login message
-
+                        menuRouter.transfer("/welcome/login");
                         printLoginRegisterExit();
                         break;
                     case "2":
@@ -44,11 +46,10 @@ public class WelcomeMenu extends Menu {
                         break;
                     case "4":
                         System.out.println("User has selected Exit. Have a nice day!");
-
+                        shutdown();
                         break;
                     default:
                         System.out.println("Invalid input, try again...");
-                        printLoginRegisterExit();
                 }
 
             } catch (IOException e) { // catches IOException and assigns it to variable 'e'
