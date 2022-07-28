@@ -7,7 +7,7 @@ public class MenuRouter {
     private final Menu[] menus;
 
     public MenuRouter() {
-        menus = new Menu[0];
+        menus = new Menu[10];
     }
 
     public void addMenu(Menu addedMenu) {

@@ -1,8 +1,8 @@
 package com.revature.nabnak;
 
-import com.revature.nabnak.menus.WelcomeMenu;
+import com.revature.nabnak.menus.*;
 import com.revature.nabnak.models.*;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import com.revature.nabnak.util.MenuRouter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -23,14 +23,25 @@ public class MainDriver {
 
     public static void main(String[] args) {
 
+        boolean isRunning = true;
+
         // initialize BufferedReader to read user input
         BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
+        MenuRouter menuRouter = new MenuRouter();
 
-        try {
-            WelcomeMenu welcomeMenu = new WelcomeMenu(terminalReader);
-        } catch (Exception e) {
-            e.printStackTrace();
+        WelcomeMenu welcomeMenu = new WelcomeMenu(terminalReader, menuRouter);
+        RegisterMenu registerMenu = new RegisterMenu(terminalReader, menuRouter);
+        DashboardMenu dashboardMenu = new DashboardMenu(terminalReader, menuRouter);
+
+        menuRouter.addMenu(welcomeMenu);
+        menuRouter.addMenu(registerMenu);
+        menuRouter.addMenu(dashboardMenu);
+
+        while(isRunning) {
+
         }
+
+
 
     }
 

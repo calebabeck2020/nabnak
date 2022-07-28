@@ -1,6 +1,7 @@
 package com.revature.nabnak.menus;
 
 import com.revature.nabnak.models.Member;
+import com.revature.nabnak.util.MenuRouter;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -9,8 +10,8 @@ public class WelcomeMenu extends Menu {
 
     static String[] welcomeMessages = {"Welcome to Nabnak", "1) Login", "2) Register", "3) View Members", "4) Exit Application"};
 
-    public WelcomeMenu(BufferedReader terminalReader) {
-        super("Welcome", "/welcome", terminalReader);
+    public WelcomeMenu(BufferedReader terminalReader, MenuRouter menuRouter) {
+        super("Welcome", "/welcome", terminalReader, menuRouter);
     }
 
     @Override // overriding the method that the Class is inheriting
@@ -23,20 +24,18 @@ public class WelcomeMenu extends Menu {
         System.out.println(welcomeMessages[0]);
         printLoginRegisterExit();
 
-        boolean running = true;
-
-        while (running) {
             try { // try-block leverages risky code that might throw an Exception
                 String input = terminalReader.readLine(); //throws an IOException, MUST be handled before compilation
 
                 switch (input) {
                     case "1":
                         System.out.println("User has selected login..."); // login message
+
                         printLoginRegisterExit();
                         break;
                     case "2":
                         System.out.println("User has selected register..."); // register message
-                        RegisterMenu registerMenu = new RegisterMenu(terminalReader); // invoke register method
+
                         printLoginRegisterExit();
                         break;
                     case "3":
@@ -45,7 +44,7 @@ public class WelcomeMenu extends Menu {
                         break;
                     case "4":
                         System.out.println("User has selected Exit. Have a nice day!");
-                        running = false;
+
                         break;
                     default:
                         System.out.println("Invalid input, try again...");
@@ -55,7 +54,6 @@ public class WelcomeMenu extends Menu {
             } catch (IOException e) { // catches IOException and assigns it to variable 'e'
                 e.printStackTrace();
             }
-        }
 
     }
 

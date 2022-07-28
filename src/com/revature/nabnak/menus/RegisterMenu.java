@@ -1,15 +1,16 @@
 package com.revature.nabnak.menus;
 
 import com.revature.nabnak.models.Member;
-
+import com.revature.nabnak.util.MenuRouter;
 import java.io.*;
 import java.time.LocalDateTime;
+
 
 public class RegisterMenu extends Menu {
 
 
-    public RegisterMenu(BufferedReader terminalReader) {
-        super("Register", "/welcome/register", terminalReader);
+    public RegisterMenu(BufferedReader terminalReader, MenuRouter menuRouter) {
+        super("Register", "/welcome/register", terminalReader, menuRouter);
     }
 
     @Override
