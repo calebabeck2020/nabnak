@@ -23,9 +23,19 @@ public class RegisterMenu extends Menu {
         String fullName = terminalReader.readLine();
 
         System.out.println("Please enter months of experience: ");
-        String experienceMonths = terminalReader.readLine();
+        int experienceMonths = 0;
+        try {
+            experienceMonths = Integer.parseInt(terminalReader.readLine());
+        } catch (NumberFormatException e){
+            e.printStackTrace();
+            System.out.println("Invalid number please try the registration again");
+            menuRouter.transfer("/welcome");
+        }
 
         String registrationDate = LocalDateTime.now().toString();
+
+        System.out.println("Please enter your password: ");
+        String password = terminalReader.readLine();
 
 
         // System.out.printf("New User registered under:\n %s,%s,%s,%s", email, fullName, experienceMonths, registrationDate);
@@ -37,7 +47,9 @@ public class RegisterMenu extends Menu {
         try(FileWriter fileWriter = new FileWriter(memoryFile, true);) {
 
             // build a new member using the User's input values
-            Member member = new Member(email,fullName,Integer.parseInt(experienceMonths),registrationDate);
+            Member member = new Member(email,fullName,experienceMonths,registrationDate, password);
+
+
             System.out.println("New user has registered: " + member);
             fileWriter.write(member.writeToFile());
 
