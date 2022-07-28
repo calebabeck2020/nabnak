@@ -17,7 +17,15 @@ public class Member {
         // the root object of this class is called Object
     }
 
-    // custom constructor
+    // custom constructor without password input
+    public Member(String email, String fullName, int experienceMonths, String registrationDate) {
+        this.email = email;
+        this.fullName = fullName;
+        this.experienceMonths = experienceMonths;
+        this.registrationDate = registrationDate;
+    }
+
+    // custom constructor with password input
     public Member(String email, String fullName, int experienceMonths, String registrationDate, String password) {
         this.email = email;
         this.fullName = fullName;
@@ -81,9 +89,15 @@ public class Member {
         return email + "," + fullName + "," + experienceMonths + "," + registrationDate + "," + password + "\n";
     }
 
-    // Polymorphism
-    @Override
+    // Polymorphism - overriding the toString() function
+    @Override // metadata  annotation to show the function is being overridden
     public String toString() {
-        return "";
+        return "Member{" +
+                "email='" + email + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", experienceMonths='" + experienceMonths + '\'' +
+                ", registrationDate='" + registrationDate + '\'' +
+                '}';
+
     }
 }
