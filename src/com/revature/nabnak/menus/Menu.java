@@ -29,7 +29,7 @@ public abstract class Menu {
 
 
     // adding abstract keyword requires any inheritors to implement the function
-    public abstract void render();
+    public abstract void render() throws Exception;
 
 
 

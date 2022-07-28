@@ -20,14 +20,17 @@ import java.io.*;
 public class MainDriver {
 
     // initialize BufferedReader to read user input
-    static BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
-    static String[] welcomeMessages = {"Welcome to Nabnak", "1) Login", "2) Register", "3) View Members", "4) Exit Application"};
 
     public static void main(String[] args) {
 
+        // initialize BufferedReader to read user input
         BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
 
-        WelcomeMenu welcomeMenu = new WelcomeMenu(terminalReader);
+        try {
+            WelcomeMenu welcomeMenu = new WelcomeMenu(terminalReader);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
