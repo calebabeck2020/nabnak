@@ -49,7 +49,11 @@ public class MainDriver {
                         break;
                     case "3":
                         System.out.println("User wishes to view other members");
-                        String[] members = readFile();
+                        Member[] members = readFile();
+
+                        for (Member member: members) {
+                            System.out.println(member);
+                        }
 
                         break;
                     case "4":
@@ -98,7 +102,7 @@ public class MainDriver {
         try(FileWriter fileWriter = new FileWriter(memoryFile, true);) {
 
             Member member = new Member(email,fullName,Integer.parseInt(experienceMonths),registrationDate);
-            System.out.println("New user has registered: " + member.toString());
+            System.out.println("New user has registered: " + member);
             fileWriter.write(member.writeToFile());
 
         } catch (IOException e) {
@@ -106,8 +110,8 @@ public class MainDriver {
         }
     }
 
-    public static String[] readFile() { // want to return a String Array containing User Information
-        String[] members = new String[100];
+    public static Member[] readFile() { // want to return a String Array containing User Information
+        Member[] members = new Member[100];
 
         try ( // initialize the try-with-resources block for our fileReader
                 FileReader fileReader = new FileReader("resources/data.txt");
@@ -119,7 +123,18 @@ public class MainDriver {
 
             // while block will repeat until there are no more lines to read (line = null)
             while(line != null) {
-                members[index] = line; // line is added to String array of members
+                String[] memberInfo = line.split(",");
+                Member member = new Member();
+
+                // assigning values to each member in the Member array
+                member.setEmail(memberInfo[0]);
+                member.setFullName(memberInfo[1]);
+                // wrapper classes auto box (can convert back to primitive values)
+                member.setExperienceMonths(Integer.parseInt(memberInfo[2]));
+                member.setRegistrationDate(memberInfo[3]);
+                member.setPassword(memberInfo[4]);
+
+                members[index] = member; // line is added to String array of members
                 index++; // increment line index
                 line = reader.readLine(); // the next file line is assigned to 'line'
             }
