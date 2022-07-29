@@ -1,6 +1,9 @@
 package com.revature.nabnak.util;
 
 import com.revature.nabnak.menus.*;
+import com.revature.nabnak.models.Member;
+import com.revature.nabnak.services.*;
+
 import java.io.*;
 
 public class AppState {
@@ -14,6 +17,7 @@ public class AppState {
         menuRouter = new MenuRouter();
 
         BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
+        MemberService memberService = new MemberService();
 
         WelcomeMenu welcomeMenu = new WelcomeMenu(terminalReader, menuRouter);
         RegisterMenu registerMenu = new RegisterMenu(terminalReader, menuRouter);

@@ -45,7 +45,7 @@ public final class CustomLogger {
 
     public static void logToFile(String message) {
         try {
-            fileWriter.write(currentTime() + message);
+            fileWriter.write(currentTime() + message + '\n');
         } catch (IOException e){
             System.out.println("Logger failed to log message");
             logToFile(e);
@@ -58,7 +58,7 @@ public final class CustomLogger {
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
 
-            fileWriter.write(currentTime() + sw);
+            fileWriter.write(currentTime() + sw + '\n');
             sw.close();
         } catch (IOException ee) {
             System.out.println("Logger failed to log Exception");
@@ -66,8 +66,7 @@ public final class CustomLogger {
         }
     }
 
-    // TODO: Implement this function
     private static String currentTime() {
-        return "\n[" + LocalDateTime.now() + "]: ";
+        return "[" + LocalDateTime.now() + "]: ";
     }
 }

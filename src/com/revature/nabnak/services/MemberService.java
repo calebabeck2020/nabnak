@@ -1,8 +1,8 @@
 package com.revature.nabnak.services;
 
 import com.revature.nabnak.models.Member;
-import com.revature.nabnak.util.CustomLogger;
-import com.revature.nabnak.util.exceptions.InvalidUserInputException;
+import com.revature.nabnak.util.*;
+import com.revature.nabnak.util.exceptions.*;
 
 import java.io.*;
 
@@ -49,6 +49,7 @@ public class MemberService {
         return true; // the member is valid
     }
 
+    // TODO: THIS FUNCTION INTERACTS WITH THE DATABASE, SHOULD IMPLEMENT IN 'MemberDao' CLASS
     public Member[] getMemberList() {
         Member[] members = new Member[10];
 
@@ -85,10 +86,20 @@ public class MemberService {
         return members;
     }
 
+    public boolean isEmailAvailable(String email) {
+        // initialize list of members from the database
+        Member[] memberList = getMemberList();
+        boolean available = true;
 
-    // TODO: IMPLEMENT ME!!!
-    public boolean isEmailAvailable() {
-        return false;
+        for (Member member: memberList) {
+            if(member.getEmail().equals(email)) {
+                CustomLogger.logToFile("User inputted email already in use: '" + email + '\'');
+                available = false;
+                break;
+            }
+        }
+
+        return available;
     }
 
 }

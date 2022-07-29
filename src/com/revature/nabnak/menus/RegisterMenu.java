@@ -1,7 +1,7 @@
 package com.revature.nabnak.menus;
 
-import com.revature.nabnak.models.Member;
-import com.revature.nabnak.util.MenuRouter;
+import com.revature.nabnak.models.*;
+import com.revature.nabnak.util.*;
 import java.io.*;
 import java.time.LocalDateTime;
 
@@ -23,14 +23,7 @@ public class RegisterMenu extends Menu {
         String fullName = terminalReader.readLine();
 
         System.out.println("Please enter months of experience: ");
-        int experienceMonths = 0;
-        try {
-            experienceMonths = Integer.parseInt(terminalReader.readLine());
-        } catch (NumberFormatException e){
-            e.printStackTrace();
-            System.out.println("Invalid number please try the registration again");
-            menuRouter.transfer("/welcome");
-        }
+        int experienceMonths = Integer.parseInt(terminalReader.readLine());
 
         String registrationDate = LocalDateTime.now().toString();
 
