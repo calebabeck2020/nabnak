@@ -2,6 +2,7 @@ package com.revature.nabnak.menus;
 
 import com.revature.nabnak.models.Member;
 import com.revature.nabnak.util.AppState;
+import com.revature.nabnak.util.CustomLogger;
 import com.revature.nabnak.util.MenuRouter;
 
 import java.io.*;
@@ -36,29 +37,33 @@ public class WelcomeMenu extends Menu {
                 switch (input) {
                     case "1":
                         System.out.println("User has selected login..."); // login message
-                        menuRouter.transfer("/welcome/login");
+                        CustomLogger.logToFile("User selected Login, navigating to login");
+                        menuRouter.transfer("/login");
 
                         break;
                     case "2":
                         System.out.println("User has selected register..."); // register message
-                        menuRouter.transfer("/welcome/register");
+                        CustomLogger.logToFile("User selected Register, navigating to register");
+                        menuRouter.transfer("/register");
 
                         break;
                     case "3":
                         System.out.println("User wishes to view other members");
-
+                        CustomLogger.logToFile("User selected View Members");
                         break;
                     case "4":
                         System.out.println("User has selected Exit. Have a nice day!");
+                        CustomLogger.logToFile("User selected Exit Application, shutting down...");
                         AppState.shutdown();
-
                         break;
                     default:
                         System.out.println("Invalid input, try again...");
+                        CustomLogger.logToFile("User input error, returning to WelcomeMenu");
                 }
 
             } catch (IOException e) { // catches IOException and assigns it to variable 'e'
                 e.printStackTrace();
+                CustomLogger.logToFile(e);
             }
 
     }
