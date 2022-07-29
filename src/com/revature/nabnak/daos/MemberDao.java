@@ -2,6 +2,7 @@ package com.revature.nabnak.daos;
 
 import com.revature.nabnak.models.Member;
 import com.revature.nabnak.util.CustomLogger;
+import com.revature.nabnak.util.custom_collections.LinkedList;
 
 import java.io.*;
 
@@ -30,8 +31,8 @@ public class MemberDao implements Crudable<Member> {
     }
 
     @Override
-    public Member[] findAll() {
-        Member[] members = new Member[10];
+    public LinkedList<Member> findAll() {
+        LinkedList<Member> members = new LinkedList<>();
 
         try ( // initialize the try-with-resources block for our fileReader
               FileReader fileReader = new FileReader("resources/data.txt");
@@ -39,7 +40,6 @@ public class MemberDao implements Crudable<Member> {
         ) {
 
             String line = reader.readLine(); // first line of the file is assigned to the String 'line'
-            int index = 0; // line index
 
             // while block will repeat until there are no more lines to read (line = null)
             while(line != null) {
@@ -54,8 +54,7 @@ public class MemberDao implements Crudable<Member> {
                 member.setRegistrationDate(memberInfo[3]);
                 member.setPassword(memberInfo[4]);
 
-                members[index] = member; // line is added to String array of members
-                index++; // increment line index
+                members.add(member); // line is added to String array of members
                 line = reader.readLine(); // the next file line is assigned to 'line'
             }
 
@@ -82,9 +81,11 @@ public class MemberDao implements Crudable<Member> {
     }
 
     public boolean loginCredentialCheck(String email, String password) {
-        Member[] memberList = findAll();
+        LinkedList<Member> memberList = findAll();
+        Member member;
 
-        for (Member member : memberList) {
+        for (int i = 0; i < memberList.size(); i++) {
+            member = memberList.get(i);
             if (email.equalsIgnoreCase(member.getEmail()) && password.equals(member.getPassword())) {
                 return true;
             }

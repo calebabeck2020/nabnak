@@ -1,12 +1,14 @@
 package com.revature.nabnak.daos;
 
+import com.revature.nabnak.util.custom_collections.LinkedList;
+
 public interface Crudable<T> { // generic <T> we can use to assign as ANY potential datatype
 
     // Create
     T create(T newObject);
 
     // Read
-    T[] findAll();
+    LinkedList<T> findAll();
     T findById(String id);
 
     // Update

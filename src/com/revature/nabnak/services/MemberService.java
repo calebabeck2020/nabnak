@@ -3,6 +3,7 @@ package com.revature.nabnak.services;
 import com.revature.nabnak.daos.MemberDao;
 import com.revature.nabnak.models.Member;
 import com.revature.nabnak.util.*;
+import com.revature.nabnak.util.custom_collections.LinkedList;
 import com.revature.nabnak.util.exceptions.*;
 
 import java.io.*;
@@ -51,11 +52,12 @@ public class MemberService {
 
     public boolean isEmailAvailable(String email) {
         // initialize list of members from the database
-        Member[] memberList = memberDao.findAll();
+        LinkedList<Member> memberList = memberDao.findAll();
+        Member member;
         boolean available = true;
 
-        for (Member member: memberList) {
-            if(member.getEmail().equalsIgnoreCase(email)) {
+        for (int i = 0; i < memberList.size(); i++) {
+            if(memberList.get(i).getEmail().equalsIgnoreCase(email)) {
                 CustomLogger.logToFile("User inputted email already in use: '" + email + '\'');
                 available = false;
                 break;

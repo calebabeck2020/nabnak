@@ -2,6 +2,7 @@ package com.revature.nabnak.util.custom_collections;
 
 public class LinkedList<E> implements List<E> {
 
+    // instantiate
     private int size;
     private Node<E> head;
     private Node<E> tail;
@@ -50,27 +51,29 @@ public class LinkedList<E> implements List<E> {
 
         // while there are remaining nodes in the LinkedList...
         while (currentNode != null) {
-            if (currentNode.data.equals(element)) { // if the current node's data matches the element...
+            if (currentNode.data.equals(element)) { // the element matches the data in the current node that will be removed
                 if (tail.equals(head)) {
-                    tail = head = null; // if there is only one
+                    tail = head = null; // there is only one element, so set head/tail to null (the LinkedList is now empty)
                 } else if (currentNode.equals(head)) {
-                    head = currentNode.nextNode;
+                    head = currentNode.nextNode; // the head is being removed, so the next node becomes the head
                 } else if (currentNode.equals(tail)) {
-                    tail = previousNode;
-                    tail.nextNode = null;
+                    tail = previousNode; // the tail is being removed, so the previous node becomes the tail
+                    tail.nextNode = null; // no node after the tail, so the next node is null
                 } else {
-                    previousNode.nextNode = currentNode.nextNode;
+                    previousNode.nextNode = currentNode.nextNode; // this nullifies the current node by linking the previous node to the next node (AFTER the current node)
                 }
-                size--;
-                return true;
+
+                size--; // the current node is nullified, list size is reduced by one
+                return true; // the element was removed successfully
 
             } else {
+                // increment the tester nodes along the LinkedList
                 previousNode = currentNode;
                 currentNode = currentNode.nextNode;
             }
         }
 
-        return false;
+        return false; // the element could not be found in the LinkedList, so it couldn't be removed
     }
 
     @Override
