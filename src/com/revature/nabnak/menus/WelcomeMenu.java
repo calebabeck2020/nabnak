@@ -48,16 +48,16 @@ public class WelcomeMenu extends Menu {
 
                         break;
                     case "3":
-                        System.out.println("User wishes to view other members");
+                        System.out.println("User wishes to view other members"); // view members message
                         CustomLogger.logToFile("User selected View Members");
                         break;
                     case "4":
-                        System.out.println("User has selected Exit. Have a nice day!");
+                        System.out.println("User has selected Exit. Have a nice day!"); // exit message
                         CustomLogger.logToFile("User selected Exit Application, shutting down...");
                         AppState.shutdown();
                         break;
                     default:
-                        System.out.println("Invalid input, try again...");
+                        System.out.println("Invalid input, try again..."); // invalid input message
                         CustomLogger.logToFile("User input error, returning to WelcomeMenu");
                 }
 

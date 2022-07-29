@@ -1,13 +1,1 @@
-[2022-07-29T13:19:20.500]: Log Start
-[2022-07-29T13:19:29.282]: User selected Login
-[2022-07-29T13:19:33.202]: User selected View Members
-[2022-07-29T13:19:36.082]: User selected Register
-[2022-07-29T13:19:45.075]: User entered valid email
-[2022-07-29T13:19:48.987]: User entered valid full name
-[2022-07-29T13:19:52.891]: User entered valid experience in months
-[2022-07-29T13:19:56.260]: User entered valid password
-[2022-07-29T13:19:56.262]: New User added to database: Member{email='caleb.beck@gmail.com', fullName='caleb beck', experienceMonths='12', registrationDate='2022-07-29T13:19:52.891'}
-[2022-07-29T13:19:56.262]: Navigating to dashboard for caleb.beck@gmail.com
-[2022-07-29T13:20:09.060]: User selected Exit Application
-[2022-07-29T13:20:21.910]: User selected Exit
-[2022-07-29T13:20:21.910]: Log End
+

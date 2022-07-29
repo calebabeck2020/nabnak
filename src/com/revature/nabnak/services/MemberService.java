@@ -14,6 +14,10 @@ public class MemberService {
             if (!isMemberValid(newMember)) {
                 throw new RuntimeException("New Member is invalid");
             }
+            if (!isEmailAvailable(newMember.getEmail())) {
+                throw new RuntimeException("Member email is invalid");
+            }
+
 
             File memoryFile = new File("resources/data.txt");
 
@@ -28,14 +32,18 @@ public class MemberService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //TODO: LOG INFO AS PERSISTED
 
         } catch (InvalidUserInputException e) {
+            CustomLogger.logToFile(e);
             e.printStackTrace();
             return null;
         }
 
         return newMember;
+    }
+
+    public Member login(Member member) {
+        return member;
     }
 
     public boolean isMemberValid(Member newMember) {
@@ -92,7 +100,7 @@ public class MemberService {
         boolean available = true;
 
         for (Member member: memberList) {
-            if(member.getEmail().equals(email)) {
+            if(member.getEmail().equalsIgnoreCase(email)) {
                 CustomLogger.logToFile("User inputted email already in use: '" + email + '\'');
                 available = false;
                 break;

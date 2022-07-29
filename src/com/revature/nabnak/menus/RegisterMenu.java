@@ -17,6 +17,8 @@ public class RegisterMenu extends Menu {
     @Override
     public void render() throws IOException {
 
+        MemberService memberService = new MemberService();
+
         System.out.println("Please enter your email: ");
         String email = terminalReader.readLine();
         CustomLogger.logToFile("User entered valid email");
@@ -40,7 +42,6 @@ public class RegisterMenu extends Menu {
 
         Member newMember = new Member(email,fullName,experienceMonths,registrationDate,password);
 
-        MemberService memberService = new MemberService();
         memberService.registerMember(newMember);
 
         CustomLogger.logToFile("Navigating to dashboard for " + newMember.getEmail());
