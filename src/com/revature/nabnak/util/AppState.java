@@ -22,10 +22,12 @@ public class AppState {
         WelcomeMenu welcomeMenu = new WelcomeMenu(terminalReader, menuRouter);
         RegisterMenu registerMenu = new RegisterMenu(terminalReader, menuRouter);
         DashboardMenu dashboardMenu = new DashboardMenu(terminalReader, menuRouter);
+        LoginMenu loginMenu = new LoginMenu(terminalReader, menuRouter);
 
         menuRouter.addMenu(welcomeMenu);
         menuRouter.addMenu(registerMenu);
         menuRouter.addMenu(dashboardMenu);
+        menuRouter.addMenu(loginMenu);
     }
 
     public void startUp() {
