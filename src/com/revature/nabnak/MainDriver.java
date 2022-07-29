@@ -1,12 +1,6 @@
 package com.revature.nabnak;
 
-import com.revature.nabnak.menus.*;
-import com.revature.nabnak.models.*;
 import com.revature.nabnak.util.*;
-
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.io.*;
 
 
 
@@ -19,15 +13,10 @@ import java.io.*;
 
 public class MainDriver {
 
-    // initialize BufferedReader to read user input
-
     public static void main(String[] args) {
 
         AppState appState = new AppState();
-
         appState.startUp();
-
-
 
     }
 

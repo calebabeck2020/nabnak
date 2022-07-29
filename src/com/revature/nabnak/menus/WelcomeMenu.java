@@ -1,6 +1,7 @@
 package com.revature.nabnak.menus;
 
 import com.revature.nabnak.models.Member;
+import com.revature.nabnak.util.AppState;
 import com.revature.nabnak.util.MenuRouter;
 
 import java.io.*;
@@ -24,7 +25,10 @@ public class WelcomeMenu extends Menu {
 
         // print out the welcome messages
         System.out.println(welcomeMessages[0]);
-        printLoginRegisterExit();
+        System.out.println(welcomeMessages[1]);
+        System.out.println(welcomeMessages[2]);
+        System.out.println(welcomeMessages[3]);
+        System.out.println(welcomeMessages[4]);
 
             try { // try-block leverages risky code that might throw an Exception
                 String input = terminalReader.readLine(); //throws an IOException, MUST be handled before compilation
@@ -33,12 +37,12 @@ public class WelcomeMenu extends Menu {
                     case "1":
                         System.out.println("User has selected login..."); // login message
                         menuRouter.transfer("/welcome/login");
-                        printLoginRegisterExit();
+
                         break;
                     case "2":
                         System.out.println("User has selected register..."); // register message
+                        menuRouter.transfer("/welcome/register");
 
-                        printLoginRegisterExit();
                         break;
                     case "3":
                         System.out.println("User wishes to view other members");
@@ -46,7 +50,8 @@ public class WelcomeMenu extends Menu {
                         break;
                     case "4":
                         System.out.println("User has selected Exit. Have a nice day!");
-                        shutdown();
+                        AppState.shutdown();
+
                         break;
                     default:
                         System.out.println("Invalid input, try again...");
@@ -56,13 +61,5 @@ public class WelcomeMenu extends Menu {
                 e.printStackTrace();
             }
 
-    }
-
-    private void printLoginRegisterExit() {
-        System.out.println("Please select one of the following:");
-        System.out.println(welcomeMessages[1]);
-        System.out.println(welcomeMessages[2]);
-        System.out.println(welcomeMessages[3]);
-        System.out.println(welcomeMessages[4]);
     }
 }

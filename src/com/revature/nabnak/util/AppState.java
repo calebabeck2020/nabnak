@@ -1,11 +1,7 @@
 package com.revature.nabnak.util;
 
-import com.revature.nabnak.menus.DashboardMenu;
-import com.revature.nabnak.menus.RegisterMenu;
-import com.revature.nabnak.menus.WelcomeMenu;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import com.revature.nabnak.menus.*;
+import java.io.*;
 
 public class AppState {
 
@@ -29,9 +25,14 @@ public class AppState {
     }
 
     public void startUp() {
+
+        CustomLogger.openLogger();
+
         while (isRunning) {
             menuRouter.transfer("/welcome");
         }
+
+        CustomLogger.closeLogger();
     }
 
     public static void shutdown() {

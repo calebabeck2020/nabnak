@@ -1,11 +1,10 @@
 package com.revature.nabnak.services;
 
 import com.revature.nabnak.models.Member;
+import com.revature.nabnak.util.CustomLogger;
 import com.revature.nabnak.util.exceptions.InvalidUserInputException;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class MemberService {
 
@@ -24,6 +23,7 @@ public class MemberService {
 
                 System.out.println("New user has registered: " + newMember);
                 fileWriter.write(newMember.writeToFile());
+                CustomLogger.logToFile("New User added to database: " + newMember);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -48,6 +48,43 @@ public class MemberService {
 
         return true; // the member is valid
     }
+
+    public Member[] getMemberList() {
+        Member[] members = new Member[10];
+
+        try ( // initialize the try-with-resources block for our fileReader
+              FileReader fileReader = new FileReader("resources/data.txt");
+              BufferedReader reader = new BufferedReader(fileReader)
+        ) {
+
+            String line = reader.readLine(); // first line of the file is assigned to the String 'line'
+            int index = 0; // line index
+
+            // while block will repeat until there are no more lines to read (line = null)
+            while(line != null) {
+                String[] memberInfo = line.split(",");
+                Member member = new Member();
+
+                // assigning values to each member in the Member array
+                member.setEmail(memberInfo[0]);
+                member.setFullName(memberInfo[1]);
+                // wrapper classes auto box (can convert back to primitive values)
+                member.setExperienceMonths(Integer.parseInt(memberInfo[2]));
+                member.setRegistrationDate(memberInfo[3]);
+                member.setPassword(memberInfo[4]);
+
+                members[index] = member; // line is added to String array of members
+                index++; // increment line index
+                line = reader.readLine(); // the next file line is assigned to 'line'
+            }
+
+        } catch (IOException e) {
+            CustomLogger.logToFile(e);
+        }
+
+        return members;
+    }
+
 
     // TODO: IMPLEMENT ME!!!
     public boolean isEmailAvailable() {

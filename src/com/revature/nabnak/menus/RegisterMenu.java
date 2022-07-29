@@ -57,40 +57,4 @@ public class RegisterMenu extends Menu {
             e.printStackTrace();
         }
     }
-
-    private Member[] readFile() { // want to return a String Array containing User Information
-        Member[] members = new Member[100];
-
-        try ( // initialize the try-with-resources block for our fileReader
-              FileReader fileReader = new FileReader("resources/data.txt");
-              BufferedReader reader = new BufferedReader(fileReader)
-        ) {
-
-            String line = reader.readLine(); // first line of the file is assigned to the String 'line'
-            int index = 0; // line index
-
-            // while block will repeat until there are no more lines to read (line = null)
-            while(line != null) {
-                String[] memberInfo = line.split(",");
-                Member member = new Member();
-
-                // assigning values to each member in the Member array
-                member.setEmail(memberInfo[0]);
-                member.setFullName(memberInfo[1]);
-                // wrapper classes auto box (can convert back to primitive values)
-                member.setExperienceMonths(Integer.parseInt(memberInfo[2]));
-                member.setRegistrationDate(memberInfo[3]);
-                member.setPassword(memberInfo[4]);
-
-                members[index] = member; // line is added to String array of members
-                index++; // increment line index
-                line = reader.readLine(); // the next file line is assigned to 'line'
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return members;
-    }
 }

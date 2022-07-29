@@ -1,6 +1,7 @@
 package com.revature.nabnak.util;
 
 import com.revature.nabnak.menus.Menu;
+import java.io.*;
 
 public class MenuRouter {
 
@@ -15,7 +16,8 @@ public class MenuRouter {
         for(int i = 0; i < menus.length; i++) {
             if (menus[i] == null) {
                 menus[i] = addedMenu;
-            } else if (menus != null) {
+                break;
+            } else if (menus[i] != null) {
                 System.out.println("Next index please");
             }
         }
@@ -23,6 +25,8 @@ public class MenuRouter {
 
     public void transfer(String route) {
         for (Menu menu: menus) {
+            if (menu == null) break;
+
             if (menu.getRoute().equals(route)) {
                 try {
                     menu.render();
