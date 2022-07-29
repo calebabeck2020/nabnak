@@ -15,7 +15,7 @@ public class MemberDao implements Crudable<Member> {
 
         // try with resources block (extends AutoCloseable, so file auto-closes)
         // in this case, fileWriter is auto-closed, REMEMBER TO ALWAYS CLOSE YOUR RESOURCES
-        try(FileWriter fileWriter = new FileWriter(memoryFile, true);) {
+        try(FileWriter fileWriter = new FileWriter(memoryFile, true)) {
 
             System.out.println("New user has registered: " + newMember);
             fileWriter.write(newMember.writeToFile());
@@ -79,5 +79,18 @@ public class MemberDao implements Crudable<Member> {
     @Override
     public boolean delete(String id) {
         return false;
+    }
+
+    public boolean loginCredentialCheck(String email, String password) {
+        Member[] memberList = findAll();
+
+        for (Member member : memberList) {
+            if (email.equalsIgnoreCase(member.getEmail()) && password.equals(member.getPassword())) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 }
